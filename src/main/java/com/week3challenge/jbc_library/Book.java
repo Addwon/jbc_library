@@ -8,18 +8,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+//@Table(name = "book")
 public class Book {
+   // @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
     @Size(min=2)
-    private String Title;
+    private String title;
 
     @NotNull
     @Size(min=2)
-    private String Author;
+    private String author;
 
     @NotNull
     @Min(4)
@@ -39,19 +41,19 @@ public class Book {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        title = title;
     }
 
     public String getAuthor() {
-        return Author;
+        return author;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        author = author;
     }
 
     public int getPublicationYear() {

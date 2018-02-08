@@ -13,7 +13,7 @@
             <a class="navbar-brand" href="list.html">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="list.html">Home</a>
+            <a href="/list">Home</a>
         </div>
         <div class="navbar-header">
             <a href="add.html"></a>
@@ -27,28 +27,41 @@
     </div>
 </nav>
 
-<form>
-    <div class="form-group">
+<form action="#"
+        th:action="@{/add}"
+      th:object="${books}"
+      method="post">
+    <div class="col-3">
+         <input type="hidden" id="hiddenId" th:field="*{id}" />
+    </div>
+    <div class="col-3">
         <label id="labelTitle">Title</label>
-        <input type="text" class="form-control" id="textTitle" placeholder="Enter book title">
+        <input type="text" class="form-control" id="textTitle" th:field="*{title}" placeholder="Enter book title"/>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
     </div>
-    <div class="form-group">
+    <div class="col-3">
         <label id="labelAuthor">Author</label>
-        <input type="text" class="form-control" id="textAuthor" placeholder="Enter book author">
+        <input type="text" class="form-control" id="textAuthor" th:field="*{author}" placeholder="Enter book author"/>
+        <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
     </div>
-    <div class="form-group">
+    <div class="col-3">
         <label id="labelYear">Publication year</label>
-        <input type="number" class="form-control" id="numberYear" placeholder="Enter publication year">
+        <input type="number" class="form-control" id="numberYear" th:field="*{publicationYear}" placeholder="Enter publication year"/>
+        <span th:if="${#fields.hasErrors('publicationYear')}" th:errors="*{publicationYear}"></span>
     </div>
-    <div class="form-group">
+    <div class="col-3">
         <label id="labelISBN">ISBN</label>
-        <input type="text" class="form-control" id="textISBN" placeholder="Enter ISBN">
+        <input type="text" class="form-control" id="textISBN" th:field="*{ISBN}" placeholder="Enter ISBN"/>
+        <span th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}"></span><br />
     </div>
-    <div class="form-group">
+    <div class="container-fluid">
         <label id="labelImage">Image</label>
-        <input type="file" class="form-control-file" id="imageBook">
+        <input type="file" class="form-control-file" id="imageBook" th:field="*{image}"/>
+        <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span><br />
     </div>
+    <div class="container-fluid">
     <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 </body>
