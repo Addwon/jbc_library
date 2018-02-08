@@ -45,7 +45,7 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        title = title;
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -53,7 +53,7 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        author = author;
+        this.author = author;
     }
 
     public int getPublicationYear() {

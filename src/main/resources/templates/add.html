@@ -28,11 +28,11 @@
 </nav>
 
 <form action="#"
-        th:action="@{/add}"
-      th:object="${books}"
+        th:action="@{/process}"
+      th:object="${book}"
       method="post">
     <div class="col-3">
-         <input type="hidden" id="hiddenId" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}" />
     </div>
     <div class="col-3">
         <label id="labelTitle">Title</label>

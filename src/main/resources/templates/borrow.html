@@ -26,5 +26,36 @@
         </div>
     </div>
 </nav>
+<div class="container">
+    <table class="table" title="Books Table" th:each="book : ${books}">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>ISBN</th>
+            <th>Cover Image</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${book.title}"></td>
+
+            <td th:text="${book.author}"></td>
+
+            <td th:text="${book.publicationYear}"></td>
+
+            <td th:text="${book.ISBN}"></td>
+
+            <td th:file="${book.image}"></td>
+            <td><input type="checkbox" class="form-check-input" value=""></td>
+        </tr>
+        <tr>
+            <button type="submit" class="btn btn-primary">Borrow</button>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
