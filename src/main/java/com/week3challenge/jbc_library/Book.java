@@ -27,6 +27,8 @@ public class Book {
     @Min(4)
     private int publicationYear;
 
+    private boolean availability;
+
     @Size(min=13)
     private String ISBN;
 
@@ -78,5 +80,13 @@ public class Book {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 }

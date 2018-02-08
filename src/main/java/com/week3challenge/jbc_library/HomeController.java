@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 public class HomeController {
     @Autowired
     BookRepository bookRepository;
-
+    String bookAvailability="";
     @RequestMapping("/")
     public String homePage(Model model) {
         model.addAttribute("books",bookRepository.findAll());
@@ -78,22 +78,60 @@ public class HomeController {
     }
 */
 @PostMapping("/process")
-public String processForm(@Valid @ModelAttribute("book") Book book, BindingResult result,
+public String addBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,
                           RedirectAttributes redirectAttributes){
     if(result.hasErrors()){
         return "add";
     }
-
+    book.setAvailability(true);
     bookRepository.save(book);
     return "redirect:/";
 }
 
-
-    @GetMapping("/borrow")
-    public String borrowBook(Model model){
-
+//List all available books first
+    @RequestMapping("/borrow")
+    public String borrowBookPage(@RequestParam(value = "borrowCheckBox", required = false) String checkboxValue,Model model) {
+        model.addAttribute("books",bookRepository.findAll());
+        //bookAvailability="Yes";
+        //model.addAttribute("bookAvailability",bookAvailability);
+        Book book=new Book();
+        if(checkboxValue != null)
+        {
+            book.setAvailability(false);
+        }
         return "borrow";
     }
+/*
+        @GetMapping("/borrow")
+        public String borrowBook(Model model){
+            model.addAttribute("book",new Book());
+            return "borrow";
+        }
+        */
+
+    /* @RequestParam(value = "checkboxName", required = false) String checkboxValue
+        if(checkboxValue != null)
+        {
+            System.out.println("checkbox is checked");
+        }
+      else
+        {
+            System.out.println("checkbox is not checked");
+        }
+       */
+/*
+    @PostMapping("/borrow")
+    public String borrowBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,
+                              RedirectAttributes redirectAttributes){
+        if(result.hasErrors()){
+            return "add";
+        }
+
+        bookRepository.save(book);
+        return "redirect:/";
+    }
+*/
+
     @GetMapping("/return")
     public String returnBook(Model model){
         // model.addAttribute("course",new Course());

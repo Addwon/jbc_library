@@ -28,7 +28,7 @@
     </div>
 </nav>
 <div class="container">
-    <table class="table" title="Books Table" th:each="book : ${books}">
+    <table class="table" title="Books Table" >
         <thead>
         <tr>
             <th>Title</th>
@@ -36,10 +36,11 @@
             <th>Publication Year</th>
             <th>ISBN</th>
             <th>Cover Image</th>
+            <th>Available</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="book : ${books}">
             <td th:text="${book.title}"></td>
 
             <td th:text="${book.author}"></td>
@@ -49,6 +50,8 @@
             <td th:text="${book.ISBN}"></td>
 
             <td th:file="${book.image}"></td>
+
+            <td th:text="${book.availability}"></td>
         </tr>
         </tbody>
     </table>

@@ -10,10 +10,10 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="list.html">JBC Library</a>
+            <a class="navbar-brand" href="/list">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="list.html">Home</a>
+            <a href="/list">Home</a>
         </div>
         <div class="navbar-header">
             <a href="add.html"></a>
@@ -27,7 +27,7 @@
     </div>
 </nav>
 <div class="container">
-    <table class="table" title="Books Table" th:each="book : ${books}">
+    <table class="table" title="Available Books" >
         <thead>
         <tr>
             <th>Title</th>
@@ -39,7 +39,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="book : ${books}">
             <td th:text="${book.title}"></td>
 
             <td th:text="${book.author}"></td>
@@ -49,13 +49,30 @@
             <td th:text="${book.ISBN}"></td>
 
             <td th:file="${book.image}"></td>
-            <td><input type="checkbox" class="form-check-input" value=""></td>
-        </tr>
-        <tr>
-            <button type="submit" class="btn btn-primary">Borrow</button>
+
+            <td>
+                <div class="col-1">
+                <input type="checkbox" name="borrowCheckBox" class="form-check-input" value=""/>
+                </div>
+                <!--
+                <input type="checkbox" class="form-check-input" th:field="*{borrow}" value=""/>
+                <span th:if="${#fields.hasErrors('borrow')}" th:errors="*{borrow}"></span>
+                -->
+            </td>
         </tr>
         </tbody>
+
     </table>
+</div>
+<div class="container">
+    <div class="col-1">
+        <form action="#"
+              th:action="@{/borrow}"
+              th:object="${book}"
+              method="post">
+        <button type="submit" class="btn btn-primary">Borrow</button>
+    </form>
+    </div>
 </div>
 </body>
 </html>
