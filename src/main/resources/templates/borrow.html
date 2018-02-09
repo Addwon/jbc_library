@@ -28,6 +28,9 @@
 
     </div>
 </nav>
+<div class="container-fluid">
+    <h2>List of available books</h2>
+</div>
 <div class="container">
     <table class="table" title="Available Books" >
         <thead>
@@ -51,9 +54,10 @@
             <td th:text="${book.ISBN}"></td>
 
             <td th:file="${book.image}"></td>
+            <td><a th:href="@{/borrow/{id} (id=${book.id})}">Borrow</a></td>
             <td>
                <!-- <a href="/availablebooks">Borrow</a>-->
-               <a th:href="@{/flag/{id}(id=${book.id})}">Borrow</a>
+              <!-- <a th:href="@{/borrow/{id}(id=${book.id})}">Borrow</a>-->
 
             </td>
             <!--

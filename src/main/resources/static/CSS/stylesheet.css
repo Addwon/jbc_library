@@ -4,3 +4,17 @@
 .form-check-input{
     alignment:center;
 }
+h1,h2{
+    font-style: oblique;
+    alignment:center;
+}
+.container-fluid{
+    align-content: center;
+}
+body{
+    background: url(../../static/images/JBCLibrary.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+}

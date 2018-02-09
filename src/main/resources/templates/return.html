@@ -10,21 +10,56 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="list.html">JBC Library</a>
+            <a class="navbar-brand" href="/list">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="list.html">Home</a>
-            <div class="navbar-header">
-                <a href="/list">List Books</a>
-            </div>
-            <div class="navbar-header">
-                <a href="/add">Add Book </a>
-            </div>
-            <div class="navbar-header">
-                <a href="/borrow">Borrow Book </a>
-            </div>
+            <a href="/index">Home</a>
         </div>
+        <div class="navbar-header">
+            <a href="/list">list Books </a>
+        </div>
+        <div class="navbar-header">
+            <a href="/add">Add Book </a>
+        </div>
+
+        <div class="navbar-header">
+            <a href="/borrow">Borrow Book</a>
+        </div>
+
     </div>
 </nav>
+<div>
+    <h2>List of available books</h2>
+</div>
+<div class="container">
+    <table class="table" title="Available Books" >
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>ISBN</th>
+            <th>Cover Image</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+
+            <td th:text="${book.author}"></td>
+
+            <td th:text="${book.publicationYear}"></td>
+
+            <td th:text="${book.ISBN}"></td>
+
+            <td th:file="${book.image}"></td>
+            <td><a th:href="@{/return/{id} (id=${book.id})}">Return</a></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+</div>
 </body>
 </html>

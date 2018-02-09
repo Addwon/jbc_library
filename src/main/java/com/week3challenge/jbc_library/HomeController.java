@@ -45,19 +45,6 @@ public class HomeController {
        // model.addAttribute("address",bookRepository.findAllByavailabilityContainingIgnoreCase("Yes"));
         return "list";
     }
-    @RequestMapping("/availablebooks")
-    public String availableBooks(HttpServletRequest request,Model model) {
-       // book.setAvailability("Yes");
-        model.addAttribute("books",bookRepository.findAllByavailabilityContainingIgnoreCase("Yes"));
-        return "availablebooks";
-    }
-    @RequestMapping("/flag/{id}")
-    public String flagBook(@PathVariable("id") long id, Model model,Book book){
-        //model.addAttribute("book", bookRepository.findOne(id));
-       // model.addAttribute("No",bookAvailability);
-        book.setAvailability("No");
-        return "availablebooks";
-    }
 
     @GetMapping("/add")
     public String addBook(Model model){
@@ -70,18 +57,58 @@ public class HomeController {
         if(result.hasErrors()){
             return "add";
         }
+        //book.setImagePath(book.getImage().toString());
         book.setAvailability("Yes");
         bookRepository.save(book);
         return "redirect:/";
     }
 
+    @RequestMapping("/borrow/{id}")
+    public String borrowBook(@PathVariable("id") long id,Model model){
+        Book book=bookRepository.findOne(id);
+
+        book.setAvailability("No");
+        model.addAttribute("book", bookRepository.findOne(id));
+        bookRepository.save(book);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/return/{id}")
+    public String returnBook(@PathVariable("id") long id,Model model){
+        Book book=bookRepository.findOne(id);
+
+        book.setAvailability("Yes");
+        model.addAttribute("book", bookRepository.findOne(id));
+        bookRepository.save(book);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/borrow")
+    public String availableBooks(HttpServletRequest request,Model model) {
+        // book.setAvailability("Yes");
+        model.addAttribute("books",bookRepository.findAllByavailabilityContainingIgnoreCase("Yes"));
+        return "borrow";
+    }
+    @RequestMapping("/return")
+    public String borrowedBooks(HttpServletRequest request,Model model) {
+        // book.setAvailability("Yes");
+        model.addAttribute("books",bookRepository.findAllByavailabilityContainingIgnoreCase("No"));
+        return "return";
+    }
+    /*
+    @RequestMapping("/borrow/{id}")
+    public String updateBook(@PathVariable("id") long id, Model model){
+        model.addAttribute("book", bookRepository.findOne(id));
+        return "add";
+    }*/
+/*
     @RequestMapping("/borrow")
     public String borrowBooks( @ModelAttribute("book") Book book,Model model) {
         model.addAttribute("books",bookRepository.findAll());
         book.setAvailability("No");
         return "borrow";
     }
-
+*/
 /*
     @PostMapping("/borrow")
     public String borrowBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,@RequestParam("id") long id,Model model,
@@ -248,10 +275,11 @@ public String borrowBook(@RequestParam("borrowCheckBox") Boolean borrowCheckBox,
         return "redirect:/";
     }
 */
-
+/*
     @GetMapping("/return")
     public String returnBook(Model model){
         // model.addAttribute("course",new Course());
         return "return";
     }
+    */
 }

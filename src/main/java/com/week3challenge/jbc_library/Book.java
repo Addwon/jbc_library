@@ -29,8 +29,10 @@ public class Book {
 
     private String availability;
 
-    @Size(min=13)
+    @Size(min=10)
     private String ISBN;
+
+    private String imagePath;
 
     private byte[] image;
 
@@ -88,5 +90,13 @@ public class Book {
 
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
