@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Return Book</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <link href="../static/CSS/stylesheet.css" rel="stylesheet"/>
 </head>
@@ -10,20 +10,21 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="list.html">JBC Library</a>
+            <a class="navbar-brand" href="/list">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="list.html">Home</a>
-            <div class="navbar-header">
-                <a href="/list">List Books</a>
-            </div>
-            <div class="navbar-header">
-                <a href="/add">Add Book </a>
-            </div>
-            <div class="navbar-header">
-                <a href="/borrow">Borrow Book </a>
-            </div>
+            <a href="/list">List Books</a>
         </div>
+        <div class="navbar-header">
+            <a href="/add">Add Book </a>
+        </div>
+        <div class="navbar-header">
+            <a href="/borrow">Borrow Book </a>
+        </div>
+        <div class="navbar-header">
+            <a href="/return">Return Book</a>
+        </div>
+
     </div>
 </nav>
 </body>

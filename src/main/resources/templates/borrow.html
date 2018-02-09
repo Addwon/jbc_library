@@ -13,17 +13,19 @@
             <a class="navbar-brand" href="/list">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="/list">Home</a>
+            <a href="/index">Home</a>
         </div>
         <div class="navbar-header">
-            <a href="add.html"></a>
+            <a href="/list">list Books </a>
         </div>
         <div class="navbar-header">
-            <a href="borrow.html"></a>
+            <a href="/add">Add Book </a>
         </div>
+
         <div class="navbar-header">
-            <a href="return.html"></a>
+            <a href="/return">Return Book</a>
         </div>
+
     </div>
 </nav>
 <div class="container">
@@ -49,30 +51,42 @@
             <td th:text="${book.ISBN}"></td>
 
             <td th:file="${book.image}"></td>
+            <td>
+               <!-- <a href="/availablebooks">Borrow</a>-->
+               <a th:href="@{/flag/{id}(id=${book.id})}">Borrow</a>
 
+            </td>
+            <!--
             <td>
                 <div class="col-1">
                 <input type="checkbox" name="borrowCheckBox" class="form-check-input" value=""/>
+
                 </div>
-                <!--
+
+            </td>
+            -->
+            <!--
                 <input type="checkbox" class="form-check-input" th:field="*{borrow}" value=""/>
                 <span th:if="${#fields.hasErrors('borrow')}" th:errors="*{borrow}"></span>
                 -->
-            </td>
+            <!--<div th:with="book.availability=${value}"></div>-->
         </tr>
         </tbody>
 
     </table>
 </div>
+<!--
 <div class="container">
     <div class="col-1">
         <form action="#"
               th:action="@{/borrow}"
               th:object="${book}"
               method="post">
+
         <button type="submit" class="btn btn-primary">Borrow</button>
     </form>
     </div>
 </div>
+-->
 </body>
 </html>

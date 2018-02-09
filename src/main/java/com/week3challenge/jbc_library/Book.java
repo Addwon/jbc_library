@@ -27,7 +27,7 @@ public class Book {
     @Min(4)
     private int publicationYear;
 
-    private boolean availability;
+    private String availability;
 
     @Size(min=13)
     private String ISBN;
@@ -82,11 +82,11 @@ public class Book {
         this.image = image;
     }
 
-    public boolean isAvailability() {
+    public String getAvailability() {
         return availability;
     }
 
-    public void setAvailability(boolean availability) {
+    public void setAvailability(String availability) {
         this.availability = availability;
     }
 }
