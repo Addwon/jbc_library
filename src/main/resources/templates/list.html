@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link href="../static/CSS/stylesheet.css" rel="stylesheet"/>
+    <link href="/CSS/stylesheet.css" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/list">JBC Library</a>
+            <a class="navbar-brand" href="/">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="/index">Home</a>
+            <a href="/">Home</a>
         </div>
         <div class="navbar-header">
             <a href="/add">Add Book </a>
@@ -48,7 +48,8 @@
             <td th:text="${book.publicationYear}"></td>
 
             <td th:text="${book.ISBN}"></td>
-            <td><img alt="Image" th:src="@{../static/images/{id}(id=${book.image})}" width="250" height="250"/></td>
+            <td><a th:href="@{book.imagePath}">Image</a></td>
+            <!--<td><img alt="Image" th:src="@{../static/images/{id}(id=${book.image})}" width="250" height="250"/></td>-->
 
             <!--<td th:file="${book.image}"></td>-->
 
@@ -59,64 +60,6 @@
         </tbody>
     </table>
 </div>
-<!--<div class="col-3">
 
-<table class="table" th:each="book : ${books}">
-    <thead>
-    <tr>
-
-        <p th:text="${book.title}"></p>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <p>Image goes here</p>
-    </tr>
-    <tr>
-        <p th:text="${book.author}">By:</p>
-    </tr>
-    <tr>
-        <p th:text="${book.ISBN}">ISBN:</p>
-    </tr>
-    <tr>
-        <p th:text="${book.publicationYear}"></p>
-    </tr>
-    </tbody>
-</table>
-</div>-->
-<!--<th th:inline="text">[[${title}]]</th>-->
-<!--
-<div class="card">
-    <div th:each="book:${books}" class="col-3">
-
-         <div class="card-header">[[${title}]]</div>
-         <div class="card-body">[[${image}]]</div>
-         <div class="card-footer">
-               <p th:inline="text">By: [[${author}]]</p>
-               <p th:inline="text">ISBN: [[${ISBN}]]</p>
-            <p th:text="text">[[${publicationYear}]]</p>
-         </div>
-    </div>
-</div>
--->
-<!--<th:block th:each="book : ${books}">-->
-
-<!--
-<table th:each="book : ${books}">
-<tr >
-    <td th:text="${book.title}"></td>
-</tr>
-<tr>
-    <td th:image="${book.image}"></td>
-</tr>
-<tr>
-    <td th:text="${book.author}"></td>
-</tr>
-<tr>
-    <td th:text="${book.ISBN}"></td>
-</tr>
-
-</table>
--->
 </body>
 </html>

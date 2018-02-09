@@ -22,21 +22,16 @@ import java.nio.file.Paths;
 public class HomeController {
     @Autowired
     BookRepository bookRepository;
-    String bookAvailability="";
+
+    String bookBorrowMessage="";
+    String bookRetrunMessage="";
+
     @RequestMapping("/")
     public String homePage(Model model) {
-        //model.addAttribute("books",bookRepository.findAll());
+
         return "index";
     }
-    /*
-    @RequestMapping("/list")
-    public String listBooks(Model model) {
-        model.addAttribute("books",bookRepository.findAll());
-       // model.addAttribute("book",bookRepository.findAllByAvailabilityContaining(true));
-        //model.addAttribute("book",bookRepository.findAllBy(true));
-        //model.addAttribute("address",bookRepository.findAllByavailabilityContainingIgnoreCase("Yes"));
-        return "list";
-    }*/
+
     @RequestMapping("/list")
     public String bookList(HttpServletRequest request,Model model) {
         model.addAttribute("books",bookRepository.findAll());
@@ -57,16 +52,17 @@ public class HomeController {
         if(result.hasErrors()){
             return "add";
         }
-        //book.setImagePath(book.getImage().toString());
         book.setAvailability("Yes");
         bookRepository.save(book);
         return "redirect:/";
     }
 
     @RequestMapping("/borrow/{id}")
-    public String borrowBook(@PathVariable("id") long id,Model model){
+    public String borrowBook(@PathVariable("id") long id,Model model ){
         Book book=bookRepository.findOne(id);
-
+        //bookBorrowMessage=book.getTitle()+" is borrowed";
+        //model.addAttribute("bookBorrowMessage",bookBorrowMessage);
+        //redirAttrs.addFlashAttribute("message", "This is borrowed");
         book.setAvailability("No");
         model.addAttribute("book", bookRepository.findOne(id));
         bookRepository.save(book);
@@ -85,201 +81,13 @@ public class HomeController {
 
     @RequestMapping("/borrow")
     public String availableBooks(HttpServletRequest request,Model model) {
-        // book.setAvailability("Yes");
         model.addAttribute("books",bookRepository.findAllByavailabilityContainingIgnoreCase("Yes"));
         return "borrow";
     }
     @RequestMapping("/return")
     public String borrowedBooks(HttpServletRequest request,Model model) {
-        // book.setAvailability("Yes");
         model.addAttribute("books",bookRepository.findAllByavailabilityContainingIgnoreCase("No"));
         return "return";
     }
-    /*
-    @RequestMapping("/borrow/{id}")
-    public String updateBook(@PathVariable("id") long id, Model model){
-        model.addAttribute("book", bookRepository.findOne(id));
-        return "add";
-    }*/
-/*
-    @RequestMapping("/borrow")
-    public String borrowBooks( @ModelAttribute("book") Book book,Model model) {
-        model.addAttribute("books",bookRepository.findAll());
-        book.setAvailability("No");
-        return "borrow";
-    }
-*/
-/*
-    @PostMapping("/borrow")
-    public String borrowBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,@RequestParam("id") long id,Model model,
-                                 RedirectAttributes redirectAttributes){
-        if(result.hasErrors()){
-            return "borrow";
-        }
-        model.addAttribute("book", bookRepository.findOne(id));
-        book.setAvailability("No");
-        bookRepository.save(book);
-        return "redirect:/list";
-    }*/
-    /*
-    @GetMapping("/borrow")
-    public String borrowBook(Model model){
-       // model.addAttribute("book",new Book());
-        model.addAttribute("books",bookRepository.findAll());
-        return "borrow";
-    }
-    @PostMapping("/update/{id}")
-    public String borrowBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,@PathVariable("id") long id,
-                              RedirectAttributes redirectAttributes){
-        if(result.hasErrors()){
-            return "borrow";
-        }
-        book.setAvailability("No");
-        bookRepository.save(book);
-        return "redirect:/list";
-    }*/
-/*
-    @RequestMapping("/borrow")
-    public String borrowBooks(Model model) {
-        model.addAttribute("books",bookRepository.findAll());
-        return "borrow";
-    }
-  */
-    /*
-    @RequestMapping("/update/{id}")
-    public String borrowBooksUpdate(@PathVariable("id") long id,Book book, Model model){
-        model.addAttribute("book", bookRepository.findOne(id));
-        book.setAvailability(false);
 
-       // if(book.isAvailability()) {
-
-
-            model.addAttribute("book", bookRepository.findAll());
-
-        return "/list";
-    }*/
-    /*
-    @RequestMapping(value = "/process", method = RequestMethod.POST)
-    public String importParse(@RequestParam("bookImage") Book book) {
-        // ... do whatever you want with 'myFile'
-        // Redirect to a successful upload page
-        byte[]Image1;
-        Image1=book.getImage();
-        Image1.
-        return "redirect:uploadSuccess.html";
-    }*/
-    /*
-    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-    public String importParse(@RequestParam("myFile") MultipartFile myFile) {
-        // ... do whatever you want with 'myFile'
-        // Redirect to a successful upload page
-        return "redirect:uploadSuccess.html";
-    }*/
-/**
-    private static String UPLOADED_FOLDER = "../static/images/";
-    String imagePath="";
-
-    @PostMapping("/process")
-    public String processForm(@Valid @ModelAttribute("book") Book book, BindingResult result,@RequestParam("bookImage") MultipartFile file,
-                              RedirectAttributes redirectAttributes,Model model){
-        if(result.hasErrors()){
-            return "add";
-        }
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
-        }
-        try {
-            byte[] bytes = book.getImage();
-
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            imagePath=path.toString();
-            Files.write(path, bytes);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        model.addAttribute("path",imagePath);
-        bookRepository.save(book);
-        return "redirect:/";
-    }
-*/
-
-/*
-//List all available books first
-    @RequestMapping("/borrow")
-    public String borrowBookPage(@RequestParam(value = "borrowCheckBox", required = false) String checkboxValue,Model model) {
-        model.addAttribute("books",bookRepository.findAll());
-        //bookAvailability="Yes";
-        //model.addAttribute("bookAvailability",bookAvailability);
-        Book book=new Book();
-        if(checkboxValue != null)
-        {
-            book.setAvailability(false);
-        }
-        return "borrow";
-    }
-    */
-/*
-@RequestMapping("/borrow")
-public String borrowBookPage(@RequestParam(value = "borrowCheckBox", required = false) String checkboxValue,Model model) {
-    model.addAttribute("books",bookRepository.findAll());
-    //bookAvailability="Yes";
-    //model.addAttribute("bookAvailability",bookAvailability);
-    Book book=new Book();
-    if(checkboxValue != null)
-    {
-        //book.setAvailability(false);
-        System.out.println(checkboxValue);
-    }
-    return "borrow";
-}
-*/
-/*
-@RequestMapping("/borrow")
-public String borrowBook(@RequestParam("borrowCheckBox") Boolean borrowCheckBox,@RequestParam("id") long id,Model model){
-    if(borrowCheckBox.equals(1)){
-        //bookRepository.findOne(id);
-        model.addAttribute("books",bookRepository.findOne(id));
-    }
-
-  return "borrow";
-}*/
-
-/*
-        @GetMapping("/borrow")
-        public String borrowBook(Model model){
-            model.addAttribute("book",new Book());
-            return "borrow";
-        }
-        */
-
-    /* @RequestParam(value = "checkboxName", required = false) String checkboxValue
-        if(checkboxValue != null)
-        {
-            System.out.println("checkbox is checked");
-        }
-      else
-        {
-            System.out.println("checkbox is not checked");
-        }
-       */
-/*
-    @PostMapping("/borrow")
-    public String borrowBookForm(@Valid @ModelAttribute("book") Book book, BindingResult result,
-                              RedirectAttributes redirectAttributes){
-        if(result.hasErrors()){
-            return "add";
-        }
-
-        bookRepository.save(book);
-        return "redirect:/";
-    }
-*/
-/*
-    @GetMapping("/return")
-    public String returnBook(Model model){
-        // model.addAttribute("course",new Course());
-        return "return";
-    }
-    */
 }

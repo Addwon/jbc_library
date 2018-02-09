@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <title>Borrow Book</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link href="../static/CSS/stylesheet.css" rel="stylesheet"/>
+    <link href="/CSS/stylesheet.css" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/list">JBC Library</a>
+            <a class="navbar-brand" href="/">JBC Library</a>
         </div>
         <div class="navbar-header">
-            <a href="/index">Home</a>
+            <a href="/">Home</a>
         </div>
         <div class="navbar-header">
             <a href="/list">list Books </a>
@@ -28,9 +28,23 @@
 
     </div>
 </nav>
+<!--
 <div class="container-fluid">
-    <h2>List of available books</h2>
+    <p>List of available books</p>
 </div>
+-->
+<!--
+<div class="container-fluid">
+<table>
+    <tr>
+        <td th:inline="text">[[${bookBorrowMessage}]]</td>
+    </tr>
+</table>
+</div>
+-->
+<div class="container-fluid" >
+    <p class="text-center">List of available books</p>
+</div >
 <div class="container">
     <table class="table" title="Available Books" >
         <thead>
@@ -53,44 +67,20 @@
 
             <td th:text="${book.ISBN}"></td>
 
-            <td th:file="${book.image}"></td>
+            <td><a th:href="@{book.imagePath}">Image</a></td>
             <td><a th:href="@{/borrow/{id} (id=${book.id})}">Borrow</a></td>
+
             <td>
                <!-- <a href="/availablebooks">Borrow</a>-->
               <!-- <a th:href="@{/borrow/{id}(id=${book.id})}">Borrow</a>-->
 
             </td>
-            <!--
-            <td>
-                <div class="col-1">
-                <input type="checkbox" name="borrowCheckBox" class="form-check-input" value=""/>
 
-                </div>
-
-            </td>
-            -->
-            <!--
-                <input type="checkbox" class="form-check-input" th:field="*{borrow}" value=""/>
-                <span th:if="${#fields.hasErrors('borrow')}" th:errors="*{borrow}"></span>
-                -->
-            <!--<div th:with="book.availability=${value}"></div>-->
         </tr>
         </tbody>
 
     </table>
 </div>
-<!--
-<div class="container">
-    <div class="col-1">
-        <form action="#"
-              th:action="@{/borrow}"
-              th:object="${book}"
-              method="post">
 
-        <button type="submit" class="btn btn-primary">Borrow</button>
-    </form>
-    </div>
-</div>
--->
 </body>
 </html>
