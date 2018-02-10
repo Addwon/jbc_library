@@ -58,11 +58,15 @@ public class HomeController {
     }
 
     @RequestMapping("/borrow/{id}")
-    public String borrowBook(@PathVariable("id") long id,Model model ){
+    public String borrowBook(@PathVariable("id") long id,Model model,RedirectAttributes redirectAttributes ){
         Book book=bookRepository.findOne(id);
         //bookBorrowMessage=book.getTitle()+" is borrowed";
         //model.addAttribute("bookBorrowMessage",bookBorrowMessage);
         //redirAttrs.addFlashAttribute("message", "This is borrowed");
+        bookBorrowMessage="\""+book.getTitle()+"\""+" is borrowed";
+
+        redirectAttributes.addFlashAttribute("message1", bookBorrowMessage);
+
         book.setAvailability("No");
         model.addAttribute("book", bookRepository.findOne(id));
         bookRepository.save(book);
@@ -70,9 +74,10 @@ public class HomeController {
     }
 
     @RequestMapping("/return/{id}")
-    public String returnBook(@PathVariable("id") long id,Model model){
+    public String returnBook(@PathVariable("id") long id,Model model,RedirectAttributes redirectAttributes){
         Book book=bookRepository.findOne(id);
-
+        bookRetrunMessage="\""+book.getTitle()+"\""+" is returned";
+        redirectAttributes.addFlashAttribute("message2", bookRetrunMessage);
         book.setAvailability("Yes");
         model.addAttribute("book", bookRepository.findOne(id));
         bookRepository.save(book);

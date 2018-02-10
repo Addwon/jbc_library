@@ -30,5 +30,7 @@
 <div class="container-fluid" >
         <p class="text-center">Welcome to JBC Library</p>
 </div >
+<div th:if="${message1}" th:text="${message1}" th:class="${'alert ' + alertClass}"/>
+<div th:if="${message2}" th:text="${message2}" th:class="${'alert ' + alertClass}"/>
 </body>
 </html>
