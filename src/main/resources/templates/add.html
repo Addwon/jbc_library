@@ -30,6 +30,7 @@
 <form action="#"
         th:action="@{/process}"
       th:object="${book}"
+      enctype="multipart/form-data"
       method="post">
     <div class="col-3">
         <input type="hidden" th:field="*{id}" />
@@ -55,9 +56,9 @@
         <span th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}"></span>
     </div>
     <div class="col-3">
-        <label id="labelImage">Image Path</label>
-        <input type="text" class="form-control" id="textimagePath" th:field="*{imagePath}" placeholder="Enter url or path"/><br />
-
+        <label id="labelImage">Image</label>
+        <input type="file" name="file" />
+        <!--<input type="text" class="form-control" id="textimagePath" th:field="*{imagePath}" placeholder="Enter url or path"/><br />-->
     </div>
     <div class="col-3">
         <input type="hidden" th:field="*{availability}" />

@@ -48,7 +48,13 @@
             <td th:text="${book.publicationYear}"></td>
 
             <td th:text="${book.ISBN}"></td>
-            <td><a th:href="@{book.imagePath}">Image</a></td>
+            <td>
+                <div th:if="${book.imagePath}!=null">
+                    <img class="img-rounded" th:src="${book.imagePath}"/>
+                    <hr/>
+                </div>
+            </td>
+            <!--<td><a th:href="@{book.imagePath}">Image</a></td>-->
             <!--<td><img alt="Image" th:src="@{../static/images/{id}(id=${book.image})}" width="250" height="250"/></td>-->
 
             <!--<td th:file="${book.image}"></td>-->

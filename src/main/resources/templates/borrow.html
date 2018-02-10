@@ -66,8 +66,13 @@
             <td th:text="${book.publicationYear}"></td>
 
             <td th:text="${book.ISBN}"></td>
-
-            <td><a th:href="@{book.imagePath}">Image</a></td>
+            <td>
+                <div th:if="${book.imagePath}!=null">
+                    <img class="img-rounded" th:src="${book.imagePath}"/>
+                    <hr/>
+                </div>
+            </td>
+            <!--<td><a th:href="@{book.imagePath}">Image</a></td>-->
             <td><a th:href="@{/borrow/{id} (id=${book.id})}">Borrow</a></td>
 
             <td>
