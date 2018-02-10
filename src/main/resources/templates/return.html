@@ -41,6 +41,7 @@
             <th>Publication Year</th>
             <th>ISBN</th>
             <th>Cover Image</th>
+            <th>Last Borrowed</th>
             <th>Select</th>
         </tr>
         </thead>
@@ -55,7 +56,7 @@
             <td th:text="${book.ISBN}"></td>
 
             <td><a th:href="@{book.imagePath}">Image</a></td>
-
+            <td th:text="${book.timeStamp}"></td>
             <td><a th:href="@{/return/{id} (id=${book.id})}">Return</a></td>
 
         </tr>

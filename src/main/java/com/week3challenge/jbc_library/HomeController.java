@@ -17,6 +17,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Controller
 public class HomeController {
@@ -63,6 +67,10 @@ public class HomeController {
         //bookBorrowMessage=book.getTitle()+" is borrowed";
         //model.addAttribute("bookBorrowMessage",bookBorrowMessage);
         //redirAttrs.addFlashAttribute("message", "This is borrowed");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        book.setTimeStamp(dateFormat.format(date).toString());
+        
         bookBorrowMessage="\""+book.getTitle()+"\""+" is borrowed";
 
         redirectAttributes.addFlashAttribute("message1", bookBorrowMessage);

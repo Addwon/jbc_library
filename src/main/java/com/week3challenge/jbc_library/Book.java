@@ -36,6 +36,8 @@ public class Book {
 
     private byte[] image;
 
+    private String timeStamp;
+
     public long getId() {
         return id;
     }
@@ -98,5 +100,13 @@ public class Book {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
